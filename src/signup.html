@@ -22,23 +22,71 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <link href="../css/auth.css" rel="stylesheet" />
+    <link href="./css/auth.css" rel="stylesheet" />
   </head>
 
   <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: #126b69">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">SUPERMARKET</a>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+        <a class="navbar-brand d-block d-lg-none" href="index.html">
+          <img src="./fonts/logo1.png" alt="Supermarket_logo" height="100" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <!-- TIRAR ESSE ACTIVE E ADICIONAR NO JS COM BASE NA PAG SELECIONADA -->
+              <a class="nav-link mx-2 active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">Sobre</a>
+              <a class="nav-link mx-2" href="#">Products</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contato</a>
+            <li class="d-none d-lg-block">
+              <a class="nav-link mx-2" href="index.html">
+                <img src="./fonts/logo1.png" alt="Supermarket_logo" height="100" />
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link mx-2 dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Company
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Blog</a></li>
+                <li><a class="dropdown-item" href="#">About Us</a></li>
+                <li><a class="dropdown-item" href="#">Contact us</a></li>
+              </ul>
+            </li>
+            <li>
+              <form action="#" class="searchform order-sm-start order-lg-last">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control nav-item" placeholder="Procurar" />
+                  <button
+                    type="submit"
+                    class="form-control search nav-item"
+                    style="width: 40px; background-color: #126b69; border: none"
+                  >
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </form>
             </li>
           </ul>
         </div>
@@ -48,7 +96,6 @@
     <div id="sign-up" class="container-fluid padding">
       <div class="row welcome text-center">
         <div class="col-12">
-          <h5>SUPERMARKET</h5>
           <h4>Criar uma conta</h4>
           <br />
           <form accept-charset="UTF-8" role="form" id="signupForm">
