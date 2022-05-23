@@ -12,11 +12,9 @@ auth.onAuthStateChanged((user) => {
 });
 
 // Create account
-const signupForm = document.querySelector('#signupForm');
-signupForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const email = signupForm['email'].value;
-  const password = signupForm['password'].value;
+function signUp() {
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
 
   auth
     .createUserWithEmailAndPassword(email, password)
@@ -31,16 +29,12 @@ signupForm.addEventListener('submit', (e) => {
           email: cred.user.email,
           address: signupForm['address'].value,
           cpf: signupForm['cpf'].value,
-          sessions: [0],
-          current: 0,
           birthday: signupForm['birthday'].value,
-          form: false,
-          characterization: characterization,
         })
         .then(function () {
           console.log('New user registred');
           alert('Nova conta criada com sucesso');
-          window.location.replace('indexUser.html');
+          window.location.replace('index.html');
         })
         .catch(function (error) {
           console.log('Error setting:', error);
@@ -49,12 +43,14 @@ signupForm.addEventListener('submit', (e) => {
     .then(() => {
       signupForm.reset();
     })
-    .catch(catchAuthError(error.code));
-});
+    .catch(function (error) {
+      catchAuthError(error.code);
+    });
+}
 
 function signIn() {
-  const email = document.querySelector('#emailfield').value;
-  const password = document.querySelector('#passwordfield').value;
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
 
   auth
     .signInWithEmailAndPassword(email, password)
@@ -65,29 +61,15 @@ function signIn() {
         if (doc.exists) {
           if (doc.data().admin === true) {
             localStorage.setItem('admin', true);
-            window.location.replace('indexAdmin.html');
+            window.location.replace('index.html');
           } else {
-            window.location.replace('indexUser.html');
+            window.location.replace('index.html');
           }
         }
       });
     })
     .catch(function (error) {
-      var errorCode = error.code;
-      switch (errorCode) {
-        case 'auth/wrong-password':
-          alert('Senha inválida');
-          break;
-        case 'auth/invalid-email':
-          alert('Email inválido');
-          break;
-        case 'auth/user-disabled':
-          alert('Conta desabilitada');
-          break;
-        case 'auth/user-not-found':
-          alert('Usuário não encontrado');
-          break;
-      }
+      catchAuthError(error.code);
     });
 }
 

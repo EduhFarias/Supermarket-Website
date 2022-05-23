@@ -66,12 +66,12 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Company
+                Minha conta
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Blog</a></li>
-                <li><a class="dropdown-item" href="#">About Us</a></li>
-                <li><a class="dropdown-item" href="#">Contact us</a></li>
+                <li><a class="dropdown-item" href="signin.html">Entrar</a></li>
+                <li><a class="dropdown-item" href="#">Compras</a></li>
+                <li><a class="dropdown-item" href="#">Editar</a></li>
               </ul>
             </li>
             <li>
@@ -165,7 +165,7 @@
                 <a class="text" href="signin.html">Faça login em vez disso</a>
               </div>
               <div class="col-6">
-                <button class="btn btn-outline-success" type="submit" id="signBtn">Criar conta</button>
+                <button class="btn btn-outline-success" type="submit" onclick="signUp()">Criar conta</button>
               </div>
             </div>
           </form>
@@ -177,7 +177,7 @@
       <div class="container-fluid padding"></div>
     </footer>
 
-    <script src="../backend/firebase.js"></script>
-    <script src="../backend/auth.js"></script>
+    <script src="./backend/firebase.js"></script>
+    <script src="./backend/auth.js"></script>
   </body>
 </html>
