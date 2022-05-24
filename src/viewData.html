@@ -16,8 +16,13 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <!-- D3 V 3.5.6 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <!-- Chart.js V 3.7.1 -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/8fbbbea480.js" crossorigin="anonymous"></script>
     <!-- Firebase Cloud Firestore and Authentication -->
@@ -27,7 +32,7 @@
     <link href="./css/main.css" rel="stylesheet" />
   </head>
 
-  <body onload="generateRadarChart()">
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: #126b69">
       <div class="container-fluid">
         <a class="navbar-brand d-block d-lg-none" href="index.html">
@@ -77,7 +82,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mx-2" href="#">Contato</a>
+              <a class="nav-link mx-2" href="contact.html">Contato</a>
             </li>
             <li>
               <form action="#" class="searchform order-sm-start order-lg-last">
@@ -98,7 +103,22 @@
       </div>
     </nav>
 
-    <div class="radarChart"></div>
+    </br>
+    <div class="row">
+      <div class="col-md-2" style="border-right: solid 1px var(--main-color);">
+        <ul>
+          <li>https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sidenav</li>
+          <li>Opção2</li>
+          <li>Opção3</li>
+        </ul>
+      </div>
+      <div class="col-md-10">
+        <h2 style="color: var(--secondary-color)">Gráfico de desempenho</h2>
+        <div id="radar-chart" style="margin: 0 auto">
+          <canvas id="canvas"></canvas>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <div class="container-fluid padding">
