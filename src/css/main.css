@@ -1,3 +1,10 @@
+/* COLORS */
+:root {
+  --main-color: #126b69;
+  --secondary-color: #23cd9f;
+  --alternative-color: #117c5f;
+}
+
 /* NAVBAR */
 @media screen and (min-width: 992px) {
   .nav-item {
@@ -5,4 +12,21 @@
     top: 25px;
     font-size: 20px;
   }
+}
+
+/* MAP SETTINGS */
+.map {
+  height: 400px;
+  width: 100%;
+  padding: 10px;
+}
+
+h3 {
+  color: var(--main-color);
+}
+h4 {
+  color: var(--alternative-color);
+}
+h5 {
+  color: var(--secondary-color);
 }
