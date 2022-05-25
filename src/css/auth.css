@@ -1,12 +1,3 @@
-/* NAVBAR */
-@media screen and (min-width: 992px) {
-  .nav-item {
-    position: relative;
-    top: 25px;
-    font-size: 20px;
-  }
-}
-
 /* SIGN-IN */
 #sign-in {
   border-radius: 25px;

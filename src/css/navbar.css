@@ -1,0 +1,37 @@
+/* NAVBAR */
+@media screen and (min-width: 992px) {
+  .nav-item {
+    line-height: 80px;
+    font-size: 20px;
+  }
+
+  .custom-search {
+    position: relative;
+    top: 29px;
+  }
+
+  .shopping-cart {
+    position: relative;
+    /* top: 5px; */
+  }
+}
+
+.badge:after {
+  content: attr(value);
+  font-size: 20px;
+  color: #fff;
+  background: var(--secondary-color);
+  border-radius: 30%;
+  padding: 0 5px;
+  position: relative;
+  left: -8px;
+  top: -10px;
+  opacity: 0.9;
+}
+
+.search {
+  width: 40px;
+  color: #fff;
+  background-color: #126b69;
+  border: none;
+}

@@ -5,15 +5,6 @@
   --alternative-color: #117c5f;
 }
 
-/* NAVBAR */
-@media screen and (min-width: 992px) {
-  .nav-item {
-    position: relative;
-    top: 25px;
-    font-size: 20px;
-  }
-}
-
 /* MAP */
 .map {
   height: 400px;
