@@ -5,9 +5,10 @@
 auth.onAuthStateChanged((user) => {
   if (user) {
     console.log('user logged in:', user);
-    localStorage.setItem('loggedUser', user.email);
+    window.localStorage.setItem('user', user.email);
   } else {
     console.log('user logged out');
+    window.localStorage.setItem('user', 'undefined');
   }
 });
 
@@ -60,9 +61,10 @@ function signIn() {
       docRef.get().then(function (doc) {
         if (doc.exists) {
           if (doc.data().admin === true) {
-            localStorage.setItem('admin', true);
+            window.localStorage.setItem('admin', true);
             window.location.replace('index.html');
           } else {
+            window.localStorage.setItem('admin', false);
             window.location.replace('index.html');
           }
         }
