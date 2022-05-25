@@ -30,10 +30,11 @@
     />
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
     <link href="./css/main.css" rel="stylesheet" />
+    <link href="./css/navbar.css" rel="stylesheet" />
   </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: #126b69">
+  <body onload="handleNavbar()">
+    <nav class="row navbar navbar-expand-lg navbar-dark p-3" style="background-color: #126b69">
       <div class="container-fluid">
         <a class="navbar-brand d-block d-lg-none" href="index.html">
           <img src="./fonts/logo1.png" alt="Supermarket_logo" height="100" />
@@ -70,11 +71,12 @@
               >
                 Minha conta
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="signin.html">Entrar</a></li>
-                <li><a class="dropdown-item" href="#">Compras</a></li>
-                <li><a class="dropdown-item" href="#">Editar</a></li>
-              </ul>
+              <ul
+                name="account-menu"
+                class="dropdown-menu"
+                style="top: 70px; line-height: initial"
+                aria-labelledby="navbarDropdownMenuLink"
+              ></ul>
             </li>
             <li class="d-none d-lg-block">
               <a class="nav-link mx-2" href="index.html">
@@ -84,13 +86,13 @@
             <li class="nav-item">
               <a class="nav-link mx-2" href="contact.html">Contato</a>
             </li>
-            <li>
+            <li class="nav-item">
               <form action="#" class="searchform order-sm-start order-lg-last">
-                <div class="form-group d-flex mx-2">
-                  <input type="text" class="form-control nav-item" placeholder="Procurar" />
+                <div class="form-group d-flex mx-2 custom-search">
+                  <input type="text" class="form-control" style="color: var(--main-color)" placeholder="Procurar" />
                   <button
                     type="submit"
-                    class="form-control search nav-item"
+                    class="form-control search"
                     style="width: 40px; background-color: #126b69; border: none"
                   >
                     <i class="fa fa-search"></i>
@@ -98,12 +100,15 @@
                 </div>
               </form>
             </li>
+            <li class="nav-item shopping-cart">
+              <a class="nav-link mx-2" href="cart.html"><i class="fa badge fa-lg" value="0">&#xf07a;</i></a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
-  </br>
+    <br />
 
     <div class="row">
       <div class="col-md-6" style="padding-left: 5%">
@@ -119,6 +124,21 @@
     </div>
 
     <div id="map" class="map"></div>
+    <script>
+      // Set map and initial position
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM(),
+          }),
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-35.7805, -9.557]),
+          zoom: 16,
+        }),
+      });
+    </script>
 
     <footer>
       <div class="container-fluid padding">
