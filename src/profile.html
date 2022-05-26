@@ -100,9 +100,32 @@
     <br />
 
     <div class="container-fluid padding">
-      <div class="row">
+      <div class="row" id="main-div">
         <div class="col-12" style="height: 1500px; border: solid 1px black">
           <h1>CARRINHO</h1>
+        </div>
+      </div>
+
+      <div id="container-floating">
+        <div class="nd3 nds">
+          <a onclick="showHistoric()"><i class="fa-solid fa-list reminder"></i></a>
+        </div>
+
+        <div class="nd2 nds">
+          <a onclick="paymentMethods()">
+            <i class="fa-solid fa-credit-card reminder"></i>
+          </a>
+        </div>
+
+        <div class="nd1 nds">
+          <a onclick="manageProviders()">
+            <a onclick="editProfile()"><i class="fa-solid fa-id-card reminder"></i></a>
+          </a>
+        </div>
+
+        <div id="floating-button">
+          <p class="plus">+</p>
+          <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png" />
         </div>
       </div>
     </div>
@@ -117,5 +140,6 @@
     <script src="./backend/auth.js"></script>
     <script src="./backend/db.js"></script>
     <script src="./shared/utils.js"></script>
+    <script src="./shared/user.js"></script>
   </body>
 </html>
