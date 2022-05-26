@@ -31,6 +31,8 @@ function signUp() {
           address: signupForm['address'].value,
           cpf: signupForm['cpf'].value,
           birthday: signupForm['birthday'].value,
+          name: signupForm['name'].value,
+          created: new Date().getDate,
         })
         .then(function () {
           console.log('New user registred');
@@ -61,12 +63,11 @@ function signIn() {
       docRef.get().then(function (doc) {
         if (doc.exists) {
           if (doc.data().admin === true) {
-            window.localStorage.setItem('admin', true);
-            window.location.replace('index.html');
+            window.localStorage.setItem('admin', 'true');
           } else {
-            window.localStorage.setItem('admin', false);
-            window.location.replace('index.html');
+            window.localStorage.setItem('admin', 'false');
           }
+          window.location.replace('index.html');
         }
       });
     })
