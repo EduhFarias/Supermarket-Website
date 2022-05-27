@@ -29,7 +29,7 @@
 .formLabel {
   float: left;
   margin-left: 2%;
-  margin-bottom: -0.1%;
+  margin-top: 3px;
 }
 
 @media only screen and (max-width: 768px) {

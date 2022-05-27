@@ -236,3 +236,13 @@ h5 {
   bottom: 0;
   line-height: 40px;
 }
+
+@media only screen and (min-width: 992px) {
+  .profile {
+    width: 50%;
+    margin: 0 auto;
+    border: solid 2px var(--main-color);
+    padding: 1%;
+    border-radius: 5px;
+  }
+}
