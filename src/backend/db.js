@@ -1,20 +1,19 @@
-// db.collection('users')
-//   .add({
-//     first: 'Ada',
-//     last: 'Lovelace',
-//     born: 1815,
-//   })
-//   .then((docRef) => {
-//     console.log('Document written with ID: ', docRef.id);
-//   })
-//   .catch((error) => {
-//     console.error('Error adding document: ', error);
-//   });
+async function getCurrentUser() {
+  let userUID = window.localStorage.getItem('user');
+  let userData = db
+    .collection('users')
+    .doc(userUID)
+    .get()
+    .then((docRef) => {
+      if (docRef.data()) return docRef.data();
+      return {};
+    })
+    .catch((error) => {
+      console.log('User not found: ', error.error);
+    });
+  return await userData;
+}
 
-// db.collection('users')
-//   .get()
-//   .then((querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//       console.log(`${doc.id} => ${doc.data()}`);
-//     });
-//   });
+function editUser() {
+  console.log(new Date());
+}
