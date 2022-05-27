@@ -1,13 +1,7 @@
-// For each of your app's pages that need information about the signed-in user, attach an observer to the global authentication object.
-// This observer gets called whenever the user's sign-in state changes.
-// Attach the observer using the onAuthStateChanged method. When a user successfully signs in, you can get information about the user in the observer.
-
 auth.onAuthStateChanged((user) => {
   if (user) {
-    console.log('user logged in:', user);
-    window.localStorage.setItem('user', user.email);
+    window.localStorage.setItem('user', user.uid);
   } else {
-    console.log('user logged out');
     window.localStorage.setItem('user', 'undefined');
   }
 });
@@ -16,6 +10,7 @@ auth.onAuthStateChanged((user) => {
 function signUp() {
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
+  const signupForm = document.querySelector('#signupForm');
 
   auth
     .createUserWithEmailAndPassword(email, password)
@@ -32,11 +27,12 @@ function signUp() {
           cpf: signupForm['cpf'].value,
           birthday: signupForm['birthday'].value,
           name: signupForm['name'].value,
-          created: new Date().getDate,
+          phone: signupForm['phone'].value,
+          created: new Date(),
         })
         .then(function () {
-          console.log('New user registred');
           alert('Nova conta criada com sucesso');
+          window.localStorage.setItem('admin', 'false');
           window.location.replace('index.html');
         })
         .catch(function (error) {
