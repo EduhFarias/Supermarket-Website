@@ -6,7 +6,6 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// Create account
 function signUp() {
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
@@ -76,35 +75,6 @@ function logout() {
   console.log('logged out');
   auth.signOut().then(() => {
     window.location.replace('index.html');
-  });
-}
-
-function redirect(role = 'none') {
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      if (role == 'admin') {
-        db.collection('users')
-          .doc(user.uid)
-          .get()
-          .then(function (doc) {
-            if (doc.exists) {
-              if (doc.data().admin === true) {
-                console.log('Access granted!');
-              } else {
-                window.location.replace('indexUser.html');
-              }
-            } else {
-              console.log('No such document');
-            }
-          })
-          .catch(function (error) {
-            console.log('Error getting document: ', error);
-          });
-      }
-    } else {
-      console.log('No user logged');
-      window.location.replace('index.html');
-    }
   });
 }
 

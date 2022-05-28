@@ -1,0 +1,139 @@
+@media only screen and (min-width: 992px) {
+  .profile {
+    width: 50%;
+    margin: 0 auto;
+    border: solid 2px var(--main-color);
+    padding: 1%;
+    border-radius: 5px;
+  }
+
+  .submit-card {
+    position: relative;
+    top: 140px;
+  }
+}
+
+/* Credit Card */
+.credit-card {
+  background-color: var(--secondary-color);
+  border: solid 2px var(--secondary-color);
+  border-radius: 20px;
+  width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  margin-top: 2%;
+  opacity: 0.85;
+}
+
+.submit-card {
+  margin-top: 10px;
+  background-color: var(--main-color);
+  border: none;
+  opacity: 0.8;
+}
+
+.submit-card:hover {
+  background-color: var(--main-color);
+  border: none;
+  opacity: 1;
+}
+
+/* Credit Card - Front */
+.bank-name {
+  position: relative;
+  left: 350px;
+  top: 15px;
+  font-size: 40px;
+}
+
+.chip {
+  position: relative;
+  top: -10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: solid 2px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  width: 50px;
+  height: 35px;
+  margin-left: 30px;
+}
+
+.custom-dollar {
+  position: relative;
+  left: 17px;
+  top: 3px;
+}
+
+.card-number {
+  position: relative;
+  margin: 0 auto;
+  top: 5px;
+  left: 30px;
+}
+
+.card-number input {
+  width: 230px;
+  font-size: 20px;
+}
+
+.card-validity {
+  position: relative;
+  top: 5px;
+  left: 30px;
+}
+
+.card-name {
+  position: relative;
+  top: 5px;
+  left: 30px;
+}
+
+.card-name input {
+  width: 280px;
+}
+
+/* Credit Card - Back */
+.mag-strip {
+  position: relative;
+  top: 40px;
+  background-color: black;
+  width: 500px;
+  height: 50px;
+  left: -14px;
+}
+
+.signature {
+  position: relative;
+  top: 60px;
+  left: 35px;
+}
+
+.cvc-code {
+  position: relative;
+  top: -15px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8));
+  width: 400px;
+}
+
+.cvc-code input {
+  position: relative;
+  left: 363px;
+  width: 37px;
+  border: none;
+}
+
+.hologram {
+  position: relative;
+  top: 105px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: solid 2px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  width: 50px;
+  height: 35px;
+  margin-left: 40px;
+}
+
+.custom-star {
+  position: relative;
+  left: 13.5px;
+  top: 2px;
+}
