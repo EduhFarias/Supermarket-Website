@@ -44,37 +44,49 @@ function editProfile() {
 }
 
 function paymentMethods() {
-  // if (thereIsCard) {
-  // } PEGAR OS DADOS DO CARTAO E CASO NAO HAJA TENTAR COM UM OBJETO VAZIO
-  let cardF =
-    '<div class="col-md-5 credit-card">' +
-    '<span class="bank-name">BANK</span>' +
-    '<div class="chip"><i class="fa-solid fa-dollar-sign custom-dollar"></i></div>' +
-    '<div class="card-number">' +
-    '<label for="number">Número do cartão</label><br/>' +
-    '<input type="text" id=""number"" minlength="19" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" number>' +
-    '</div>' +
-    '<div class="card-validity">' +
-    '<label for="validity">Validade</label><br/>' +
-    '<input id="validity" type="month">' +
-    '</div>' +
-    '<div class="card-name">' +
-    '<label for="name">Nome</label><br/>' +
-    '<input type="text" id="name" placeholder="NOME COMO DESCRITO NO CARTÃO">' +
-    '</div>' +
-    '</div>';
-  let cardB =
-    '<div class="col-md-5 credit-card">' +
-    '<div class="mag-strip"></div>' +
-    '<div class="signature">' +
-    '<p style="color: black">Assinatura</p><div class="cvc-code"><input type="string" minlength="3" maxlength="3" placeholder="CVC" number></div>' +
-    '</div>' +
-    '<div class="hologram"><i class="fa fa-star custom-star"></i></div>' +
-    '</div>';
-  document.getElementById('main-div').innerHTML =
-    cardF +
-    cardB +
-    '<div class="col-md-2" style="text-align: center"><button class="btn btn-primary submit-card">Cadastrar</button></div>';
+  getUserCard().then((card) => {
+    if (Object.keys(card).length === 0) card = { cvc: '', name: '', number: '', validity: '' };
+    let cardF =
+      '<div class="col-md-5 credit-card">' +
+      '<span class="bank-name">BANK</span>' +
+      '<div class="chip"><i class="fa-solid fa-dollar-sign custom-dollar"></i></div>' +
+      '<div class="card-number">' +
+      '<label for="number">Número do cartão</label><br/>' +
+      '<input class="form-control" type="text" id="number" minlength="19" maxlength="19" value="' +
+      card.number +
+      '" placeholder="XXXX XXXX XXXX XXXX" number>' +
+      '</div>' +
+      '<div class="card-validity">' +
+      '<label for="validity">Validade</label><br/>' +
+      '<input id="validity" type="month" value="' +
+      card.validity +
+      '">' +
+      '</div>' +
+      '<div class="card-name">' +
+      '<label for="name">Nome</label><br/>' +
+      '<input type="text" id="name" value="' +
+      card.name +
+      '" placeholder="NOME COMO DESCRITO NO CARTÃO">' +
+      '</div>' +
+      '</div>';
+    let cardB =
+      '<div class="col-md-5 credit-card">' +
+      '<div class="mag-strip"></div>' +
+      '<div class="signature">' +
+      '<p style="color: black">Assinatura</p><div class="cvc-code"><input id="cvc" type="string" minlength="3" maxlength="3" value="' +
+      card.cvc +
+      '" placeholder="CVC" number></div>' +
+      '</div>' +
+      '<div class="hologram"><i class="fa fa-star custom-star"></i></div>' +
+      '</div>';
+    document.getElementById('main-div').innerHTML =
+      '<form id="credit-card"><h3>Fazer cadastro do cartão de crédito</h3><fieldset><div class="row">' +
+      cardF +
+      cardB +
+      '<div class="col-md-2" style="text-align: center">' +
+      '<button type="button" class="btn btn-primary submit-card" onclick="setCard()">Cadastrar</button>' +
+      '</div></div></fieldset></form>';
+  });
 }
 
 function showHistoric() {

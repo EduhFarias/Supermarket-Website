@@ -14,11 +14,52 @@ async function getCurrentUser() {
   return await userData;
 }
 
-function setCard() {}
+function setCard() {
+  const cardData = document.getElementById('credit-card');
+  db.collection('cards')
+    .doc(window.localStorage.getItem('user'))
+    .set({
+      number: cardData['number'].value,
+      cvc: cardData['cvc'].value,
+      name: cardData['name'].value,
+      validity: cardData['validity'].value,
+    })
+    .then(() => alert('Cartão cadastrado com sucesso'))
+    .catch((error) => console.log(error));
+}
 
-async function getUserCard() {}
+async function getUserCard() {
+  let userUID = window.localStorage.getItem('user');
+  let userCard = db
+    .collection('cards')
+    .doc(userUID)
+    .get()
+    .then((docRef) => {
+      if (docRef.data()) return docRef.data();
+      return {};
+    })
+    .catch((error) => {
+      console.log('User not found: ', error.error);
+      return {};
+    });
+  return await userCard;
+}
 
-async function getUserHistoric() {}
+async function getUserHistoric() {
+  let userUID = window.localStorage.getItem('user');
+  let userHistoric = db
+    .collection('cards')
+    .doc(userUID)
+    .get()
+    .then((docRef) => {
+      if (docRef.data()) return docRef.data();
+      return {};
+    })
+    .catch((error) => {
+      console.log('User not found: ', error.error);
+    });
+  return await userHistoric;
+}
 
 function editUser() {
   const docRef = document.getElementsByClassName('profile')[0];

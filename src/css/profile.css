@@ -14,6 +14,11 @@
 }
 
 /* Credit Card */
+#credit-card h3 {
+  text-align: center;
+  text-decoration: underline;
+}
+
 .credit-card {
   background-color: var(--secondary-color);
   border: solid 2px var(--secondary-color);
@@ -71,7 +76,7 @@
 }
 
 .card-number input {
-  width: 230px;
+  width: 245px;
   font-size: 20px;
 }
 
