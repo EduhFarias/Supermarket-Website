@@ -22,6 +22,7 @@ function signUp() {
         .set({
           admin: false,
           email: cred.user.email,
+          id: cred.user.uid,
           address: signupForm['address'].value,
           cpf: signupForm['cpf'].value,
           birthday: signupForm['birthday'].value,
