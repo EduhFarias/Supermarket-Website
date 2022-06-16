@@ -33,7 +33,7 @@
     <link href="./css/navbar.css" rel="stylesheet" />
     <link href="./css/admin.css" rel="stylesheet" />
     <script>
-      if (window.localStorage.getItem('admin') == 'false') {
+      if (window.sessionStorage.getItem('admin') == 'false') {
         window.location.replace('index.html');
       }
     </script>
@@ -64,7 +64,7 @@
               <a class="nav-link mx-2 active" aria-current="page" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mx-2" href="#">Produtos</a>
+              <a class="nav-link mx-2" href="products.html">Produtos</a>
             </li>
             <li class="nav-item dropdown">
               <a

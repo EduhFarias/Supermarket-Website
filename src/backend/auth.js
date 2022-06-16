@@ -1,8 +1,8 @@
 auth.onAuthStateChanged((user) => {
   if (user) {
-    window.localStorage.setItem('user', user.uid);
+    window.sessionStorage.setItem('user', user.uid);
   } else {
-    window.localStorage.setItem('user', 'undefined');
+    window.sessionStorage.setItem('user', 'undefined');
   }
 });
 
@@ -32,7 +32,7 @@ function signUp() {
         })
         .then(function () {
           alert('Nova conta criada com sucesso');
-          window.localStorage.setItem('admin', 'false');
+          window.sessionStorage.setItem('admin', 'false');
           window.location.replace('index.html');
         })
         .catch(function (error) {
@@ -59,9 +59,9 @@ function signIn() {
       docRef.get().then(function (doc) {
         if (doc.exists) {
           if (doc.data().admin === true) {
-            window.localStorage.setItem('admin', 'true');
+            window.sessionStorage.setItem('admin', 'true');
           } else {
-            window.localStorage.setItem('admin', 'false');
+            window.sessionStorage.setItem('admin', 'false');
           }
           window.location.replace('index.html');
         }

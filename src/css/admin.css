@@ -34,6 +34,17 @@
 }
 
 /* PRODUCT */
+.list {
+  text-align: center;
+}
+
+.product {
+  border: solid 1px var(--main-color);
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+  color: #ffffff;
+}
+
 .product-form {
   border: solid 2px var(--main-color);
   padding: 1%;
@@ -41,14 +52,6 @@
 
 .product-form label {
   padding: 3px;
-}
-
-#preview {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  top: -50px;
-  left: 100px;
 }
 
 /* TOGGLE */

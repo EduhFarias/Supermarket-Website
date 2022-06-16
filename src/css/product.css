@@ -1,0 +1,153 @@
+img {
+  height: 100px;
+  width: auto;
+  background-color: #fff;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.product-item {
+  text-align: center;
+  border-radius: 0.25rem;
+  padding: 1%;
+  margin: 2px;
+  width: auto;
+  max-width: 280px;
+  background-color: #fff;
+  border: solid 1px transparent;
+}
+
+.product-item:hover {
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+}
+
+.product-item p {
+  /* font-size: 20px; */
+  margin-bottom: 2px;
+}
+
+.value {
+  font-size: 30px;
+  color: var(--alternative-color);
+}
+
+.dashed-value {
+  text-decoration: line-through;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#products-list {
+  padding: 2%;
+}
+
+.product-added {
+  border: solid 1px var(--secondary-color);
+}
+/*
+.product-added::before,
+.product-added::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-color: transparent;
+  border-style: solid;
+  z-index: 1;
+}
+
+.product-added::after {
+  content: '\2713';
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+.product-added::before {
+  border-radius: 0;
+  border-width: 12px;
+  border-left-color: var(--secondary-color);
+  border-top-color: var(--secondary-color);
+} */
+
+.cart-description {
+  max-height: 1000px;
+  padding: 30px 50px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.cart-product {
+  border: solid 1px var(--main-color);
+  border-radius: 5px;
+  margin: 1%;
+  padding: 1%;
+}
+
+.cart-product img {
+  height: 70px;
+}
+
+.span-cart-provider {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.cart-summary {
+  height: 500px;
+  padding: 30px 30px;
+  background-color: #fff;
+}
+
+.btn-full {
+  font-size: large;
+  font-weight: bolder;
+  background-color: var(--main-color);
+  opacity: 0.9;
+  border-color: var(--main-color);
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.btn-full:hover {
+  opacity: 1;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.btn-outline {
+  background-color: #fff;
+  color: var(--main-color);
+  font-size: large;
+  font-weight: bolder;
+  border-color: var(--main-color);
+  width: 100%;
+}
+
+.btn-outline:hover {
+  background-color: var(--main-color);
+  color: #fff;
+  border-color: var(--main-color);
+}
+
+.pix {
+  text-align: center;
+  padding-bottom: 7%;
+  background-color: rgba(78, 228, 188, 0.2);
+  margin-bottom: 15px;
+}
+
+.pix p {
+  color: var(--secondary-color);
+  position: relative;
+  top: 25px;
+}
+
+#pix {
+  font-size: 30px;
+  position: relative;
+  top: 35px;
+}

@@ -18,17 +18,19 @@ function manageProducts() {
   allProducts().then((products) => {
     savedProducts = products;
 
-    let addProduct = '<li><a onclick="showProductForm()">Adicionar novo produto</a>';
+    let addProduct = '<div class="col-12"><a onclick="showProductForm()">Adicionar novo produto</a></div>';
     let productsList = products.map(
-      (product, index) => '<li><a onclick="showProductForm(' + index + ')">' + product.name + '</a></li>'
+      (product, index) =>
+        '<div class="col-4 product"><a onclick="showProductForm(' + index + ')">' + product.name + '</a></div>'
     );
 
     document.getElementById('main-div').innerHTML =
       '<div class="row">' +
-      '<div class="col-md-4"><ul>' +
+      '<div class="col-md-4 list">' +
+      '<div class="row">' +
       addProduct +
       productsList.join('') +
-      '</ul></div>' +
+      '</div></div>' +
       '<div id="product" class="col-md-8 product-form">' +
       '<div></div>';
     showProductForm();
@@ -37,7 +39,7 @@ function manageProducts() {
 
 function showProductForm(ref = 'default') {
   let product;
-  if (ref == 'default') product = new Product('', '', '', false, '', '', '');
+  if (ref == 'default') product = new Product('', '', '', false, '', '', '', savedProducts.length);
   else product = savedProducts[ref];
 
   let html =
@@ -96,19 +98,25 @@ function showProductForm(ref = 'default') {
   document.getElementById('product').innerHTML = html;
 
   submitProduct.onclick = (evt) => {
-    setProduct();
+    setProduct(product.imgSrc, product.id);
   };
 }
 
 function manageUsers() {
   getAllUsers().then((users) => {
     savedUsers = users;
-    let usersList = users.map((user, index) => '<li><a onclick="showUser(' + index + ')">' + user.name + '</a></li>');
+
+    let addUser = '<div class="col-12"><a onclick="showUser()">Adicionar novo usuário</a></div>';
+    let usersList = users.map(
+      (user, index) => '<div class="col-md-4 "><a onclick="showUser(' + index + ')">' + user.name + '</a></div>'
+    );
     document.getElementById('main-div').innerHTML =
       '<div class="row">' +
-      '<div class="col-md-4"><ul>' +
+      '<div class="col-md-4 list">' +
+      '<div class="row">' +
+      addUser +
       usersList.join(' ') +
-      '</ul></div>' +
+      '</div></div>' +
       '<div id="user" class="col-md-8">' +
       '<div></div>';
     showUser();
@@ -172,14 +180,18 @@ function showUser(index = 0) {
 function manageProviders() {
   getAllProviders().then((providers) => {
     savedProdivers = providers;
+    let addProvider = '<div class="col-12"><a onclick="showProvider()">Adicionar novo fornecedor</a></div>';
     let providersList = providers.map(
-      (provider, index) => '<li><a onclick="showProvider(' + index + ')">' + provider.name + '</a></li>'
+      (provider, index) =>
+        '<div class="col-md-4"><a onclick="showProvider(' + index + ')">' + provider.name + '</a></div>'
     );
     document.getElementById('main-div').innerHTML =
       '<div class="row">' +
-      '<div class="col-md-4"><ul>' +
+      '<div class="col-md-4 list">' +
+      '<div class="row">' +
+      addProvider +
       providersList.join(' ') +
-      '</ul></div>' +
+      '</div></div>' +
       '<div id="provider" class="col-md-8">' +
       '<div></div>';
     showProvider();
@@ -241,3 +253,10 @@ function showProvider(ref = 'default') {
     setProvider();
   };
 }
+
+///////////////////////////////
+///////////////////////////////
+// ONDE TEM <UL><LI> TALVEZ TROCAR POR UMA DIV COM BOTÃO CADA UMA COM COL-MD-2 PARA ELE MOSTRAR ORGANIZADO
+// E LIMITAR A ALTURA PARA ADICIONAR O OVERFLOW-Y E X
+///////////////////////////////
+///////////////////////////////

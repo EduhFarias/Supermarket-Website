@@ -1,5 +1,5 @@
 async function getCurrentUser() {
-  let userUID = window.localStorage.getItem('user');
+  let userUID = window.sessionStorage.getItem('user');
   let userData = db
     .collection('users')
     .doc(userUID)
@@ -42,6 +42,7 @@ async function getAllUsers() {
       querySnapshot.forEach((doc) => {
         docs.push(doc.data());
       });
+      savedUsers = docs;
       return docs;
     });
 }
@@ -49,7 +50,7 @@ async function getAllUsers() {
 function setCard() {
   const cardData = document.getElementById('credit-card');
   db.collection('cards')
-    .doc(window.localStorage.getItem('user'))
+    .doc(window.sessionStorage.getItem('user'))
     .set({
       number: cardData['number'].value,
       cvc: cardData['cvc'].value,
@@ -61,7 +62,7 @@ function setCard() {
 }
 
 async function getUserCard() {
-  let userUID = window.localStorage.getItem('user');
+  let userUID = window.sessionStorage.getItem('user');
   let userCard = db
     .collection('cards')
     .doc(userUID)
@@ -78,7 +79,7 @@ async function getUserCard() {
 }
 
 async function getUserHistoric() {
-  let userUID = window.localStorage.getItem('user');
+  let userUID = window.sessionStorage.getItem('user');
   let userHistoric = db
     .collection('cards')
     .doc(userUID)
@@ -96,7 +97,7 @@ async function getUserHistoric() {
 function editUser() {
   const docRef = document.getElementsByClassName('profile')[0];
   db.collection('users')
-    .doc(window.localStorage.getItem('user'))
+    .doc(window.sessionStorage.getItem('user'))
     .update({
       address: docRef['address'].value,
       cpf: docRef['cpf'].value,
@@ -142,6 +143,7 @@ async function getAllProviders() {
       querySnapshot.forEach((doc) => {
         docs.push(doc.data());
       });
+      savedProdivers = docs;
       return docs;
     });
 }
