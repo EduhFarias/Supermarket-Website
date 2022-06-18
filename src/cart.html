@@ -113,7 +113,7 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="cart-summary">
+          <div class="cart-summary" id="s-p">
             <h3>
               <i class="fa-solid fa-file-invoice-dollar"></i>
               RESUMO
@@ -129,6 +129,18 @@
         <div class="row text-center"></div>
       </div>
     </footer>
+
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="paymentModalLabel">CONFIRMAR PAGAMENTO!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-body"></div>
+        </div>
+      </div>
+    </div>
 
     <script src="./backend/firebase.js"></script>
     <script src="./backend/auth.js"></script>

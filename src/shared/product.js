@@ -165,9 +165,7 @@ function loadCartInfo() {
     '<div class="col-12">' +
     '<p>Valor total dos produtos: <span style="font-weight: bolder" id="total">R$ ' +
     totalValue.toFixed(2) +
-    '</span></p><hr />' +
-    '<p>Frete: <span style="font-weight: bolder" id="shipping">R$ 0,00</span></p>' +
-    '</div>';
+    '</span></p><hr />';
   summary +=
     '<div class="col-12 pix"><h5>Valor no <b>PIX</b>: <span style="font-weight: bolder" id="pix">R$ ' +
     pixValue.toFixed(2) +
@@ -175,8 +173,8 @@ function loadCartInfo() {
     (totalValue - pixValue).toFixed(2) +
     '</b>)</p></div>';
   summary +=
-    '<button class="btn btn-primary btn-full" onclick="console.log(\'pagamento\')">IR PARA O PAGAMENTO</button>' +
-    '<button class="btn btn-outline-primary btn-outline" onclick="">CONTINUAR COMPRANDO</button>';
+    '<button class="btn btn-primary btn-full" id="load-payment">IR PARA O PAGAMENTO</button>' +
+    '<button class="btn btn-outline-primary btn-outline" id="redirect">CONTINUAR COMPRANDO</button>';
 
   document.getElementById('description').innerHTML = cartDescription;
   document.getElementById('summary').innerHTML = summary;
@@ -191,4 +189,66 @@ function loadCartInfo() {
       loadCartInfo();
     });
   });
+
+  document.getElementById('load-payment').addEventListener('click', () => {
+    let html = '<h3><i class="fa-solid fa-money-check-dollar"></i> PAGAMENTO</h3>';
+
+    html +=
+      '<div class="col-12">' +
+      '<p>Valor total dos produtos: <span style="font-weight: bolder" id="total">R$ ' +
+      totalValue.toFixed(2) +
+      '</span></p><hr />' +
+      '<span>Frete:</span>' +
+      '<form>' +
+      '<input type="radio" id="radio-local" name="shipping" value="local">' +
+      '<label for="radio-local"> Buscar no local</label><br>' +
+      '<input type="radio" id="radio-shipping" name="shipping" value="shipping">' +
+      '<label for="radio-shipping"> Entregar em casa</label><br>' +
+      '</form>' +
+      '</div>' +
+      '<div class="col-12 pix"><h5>Valor no <b>PIX</b>: <span style="font-weight: bolder" id="pix">R$ ' +
+      pixValue.toFixed(2) +
+      '</span></h5><p style="text-align:left; left:10%">(Economize: <b>R$ ' +
+      (totalValue - pixValue).toFixed(2) +
+      '</b>)</p></div>' +
+      '<div class="row"><h5 style="color: var(--main-color)">MÉTODO</h5><hr>' +
+      '<div class="col-12"><form>' +
+      '<input type="radio" id="radio-pix" name="payment" value="pix">' +
+      '<label for="radio-pix"> PIX</label><br>' +
+      '<input type="radio" id="radio-cc" name="payment" value="cc">' +
+      '<label for="radio-cc"> Cartão de crédito</label><br>' +
+      '</form></div>' +
+      '<div class="col-12"><button class="btn btn-primary btn-full" id="confirm-payment" data-bs-toggle="modal" data-bs-target="#paymentModal">CONFIRMAR PAGAMENTO</button></div>' +
+      '</div>';
+    document.getElementById('s-p').innerHTML = html;
+
+    document.getElementsByName('shipping').forEach((input) => {
+      input.addEventListener('click', () => {
+        if (document.querySelector('input[name="shipping"]').checked) {
+          document.getElementById('total').innerHTML = 'R$ ' + totalValue.toFixed(2);
+          document.getElementById('pix').innerHTML = 'R$ ' + pixValue.toFixed(2);
+        } else {
+          document.getElementById('total').innerHTML = 'R$ ' + (totalValue + 5.0).toFixed(2);
+          document.getElementById('pix').innerHTML = 'R$ ' + (pixValue + 5.0).toFixed(2);
+        }
+      });
+    });
+
+    document.getElementById('confirm-payment').addEventListener('click', () => {
+      const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+      let modalContent = '<h3>COMPRA CONFIRMADA!</h3>';
+      if (paymentMethod === 'pix')
+        modalContent =
+          '<h4>ESCANEEI O QR-CODE PARA CONFIRMAR O PAGAMENTO PELO PIX!</h4>' +
+          '<img style="height:100%" src="./fonts/qrcode.png" alt="" />';
+      document.getElementById('modal-body').innerHTML = modalContent;
+      document.getElementById('modal-body');
+      // window.location.replace('products.html');
+    });
+  });
+
+  document.getElementById('redirect').addEventListener('click', () => window.location.replace('products.html'));
 }
+
+// NO BOTÃO DE CONFIRMAR, AGORA SALVAR TODOS OS VALORES E METODOS USADOS PARA ENVIAR PARA O HISTORICO DE COMPRAS
+// ADD FUNÇAO PRA REMOVER SE N JA TIVER
