@@ -26,7 +26,7 @@
     <link href="./css/navbar.css" rel="stylesheet" />
   </head>
 
-  <body onload="handleNavbar()">
+  <body onload="handleNavbar(); allProducts()">
     <nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: #126b69">
       <div class="container-fluid">
         <a class="navbar-brand d-block d-lg-none" href="index.html">
@@ -82,8 +82,14 @@
             <li class="nav-item">
               <form action="#" class="searchform order-sm-start order-lg-last">
                 <div class="form-group d-flex mx-2 custom-search">
-                  <input type="text" class="form-control" style="color: var(--main-color)" placeholder="Procurar" />
-                  <button type="submit" class="form-control search">
+                  <input
+                    type="text"
+                    class="form-control"
+                    style="color: var(--main-color)"
+                    id="search-input"
+                    placeholder="Procurar"
+                  />
+                  <button type="button" id="search-btn" class="form-control search">
                     <i class="fa fa-search"></i>
                   </button>
                 </div>

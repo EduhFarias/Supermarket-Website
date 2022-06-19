@@ -83,8 +83,14 @@
             <li class="nav-item">
               <form action="#" class="searchform order-sm-start order-lg-last">
                 <div class="form-group d-flex mx-2 custom-search">
-                  <input type="text" class="form-control" style="color: var(--main-color)" placeholder="Procurar" />
-                  <button type="submit" class="form-control search">
+                  <input
+                    type="text"
+                    class="form-control"
+                    style="color: var(--main-color)"
+                    id="search-input"
+                    placeholder="Procurar"
+                  />
+                  <button type="button" id="search-btn" class="form-control search">
                     <i class="fa fa-search"></i>
                   </button>
                 </div>
@@ -133,11 +139,30 @@
       </div>
     </footer>
 
+    <div
+      class="modal fade"
+      id="historicCardModal"
+      tabindex="-1"
+      aria-labelledby="historicCardModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="historicCardModalLabel">COMPRA DETALHADA</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-body"></div>
+        </div>
+      </div>
+    </div>
+
     <script src="./backend/firebase.js"></script>
     <script src="./backend/auth.js"></script>
     <script src="./backend/db.js"></script>
     <script src="./shared/utils.js"></script>
     <script src="./shared/user.js"></script>
+    <script src="./shared/product.js"></script>
     <script src="./shared/profile.js"></script>
   </body>
 </html>

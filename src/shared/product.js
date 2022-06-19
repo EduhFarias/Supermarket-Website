@@ -1,8 +1,9 @@
 class Product {
-  constructor(name, price, unit, isNatural, provider, imgSrc, discount = 0.0, id) {
+  constructor(name, price, unit, type, isNatural, provider, imgSrc, discount = 0.0, id) {
     this.name = name;
     this.price = price;
     this.unit = unit;
+    this.type = type;
     this.isNatural = isNatural;
     this.provider = provider;
     this.imgSrc = imgSrc;
@@ -28,6 +29,7 @@ async function allProducts() {
         docs.push(doc.data());
       });
       savedProducts = docs;
+      allProductsToDisplay = docs;
       return docs;
     });
 }
@@ -44,6 +46,7 @@ function setProduct(defaultImg = '', id) {
       isNatural: docRef['is-natural'].checked,
       provider: docRef['provider'].value,
       discount: docRef['discount'].value,
+      type: docRef['type'].value,
       unit: docRef['unit'].value,
       id: id,
     })
@@ -55,12 +58,11 @@ function setProduct(defaultImg = '', id) {
 }
 
 function savePurchase(obj) {
-  date = new Date();
-  obj.created = date.getTime();
+  obj.created = new Date();
   db.collection('purchases')
     .doc(window.localStorage.getItem('user'))
     .collection('purchase')
-    .doc(date.toString().replace(' GMT-0300 (Brasilia Standard Time)', ''))
+    .doc(obj.created.toString().replace(' GMT-0300 (Brasilia Standard Time)', ''))
     .set({
       obj: obj,
     })
@@ -68,7 +70,7 @@ function savePurchase(obj) {
       window.sessionStorage.removeItem('productsInCart');
       window.sessionStorage.removeItem('count');
       document.getElementById('modal-body').innerHTML = '<h3>COMPRA CONFIRMADA!</h3>';
-      setTimeout(() => window.location.replace('index.html'), 2000);
+      setTimeout(() => window.location.replace('index.html'), 5000);
     })
     .catch((error) => console.log(error));
 }
@@ -99,12 +101,16 @@ function removeProduct(index) {
   loadCartInfo();
 }
 
-function displayAllProducts() {
+function displayAllProducts(filteredProducts = []) {
   allProducts().then((products) => {
     listedProducts = products;
     let html = '';
     products.forEach((p, index) => {
-      let product = new Product(p.name, p.price, p.unit, p.isNatural, p.provider, p.imgSrc, p.discount, p.id);
+      if (Object.keys(filteredProducts).length != 0) {
+        const condition = filteredProducts.find((prod) => prod.id === p.id);
+        if (!condition) return;
+      }
+      let product = new Product(p.name, p.price, p.unit, p.type, p.isNatural, p.provider, p.imgSrc, p.discount, p.id);
       html +=
         '<div class="col-1 product-item" id="' +
         product.name +
@@ -311,13 +317,15 @@ function loadCartInfo() {
             '<option value="5">5x</option>' +
             '</select><br />' +
             '<span class="stages">Valor de cada parcela: <span id="cc-value">R$ ' +
-            totalValue +
+            (purchaseObj.shipping === 'local' ? totalValue : totalValue + 5.0).toFixed(2) +
             '</span></span><br />' +
             '<button class="btn btn-primary btn-full" id="confirm">CONFIRMAR PARCELAMENTO</button>';
 
           document.getElementById('stages').addEventListener('change', () => {
             purchaseObj.stages = parseInt(document.getElementById('stages').value);
-            document.getElementById('cc-value').innerHTML = 'R$ ' + (totalValue / purchaseObj.stages).toFixed(2);
+            document.getElementById('cc-value').innerHTML =
+              'R$ ' +
+              ((purchaseObj.shipping === 'local' ? totalValue : totalValue + 5.0) / purchaseObj.stages).toFixed(2);
           });
 
           document.getElementById('confirm').addEventListener('click', () => savePurchase(purchaseObj));

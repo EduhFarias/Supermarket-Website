@@ -95,8 +95,14 @@
             <li class="nav-item">
               <form action="#" class="searchform order-sm-start order-lg-last">
                 <div class="form-group d-flex mx-2 custom-search">
-                  <input type="text" class="form-control" style="color: var(--main-color)" placeholder="Procurar" />
-                  <button type="submit" class="form-control search">
+                  <input
+                    type="text"
+                    class="form-control"
+                    style="color: var(--main-color)"
+                    id="search-input"
+                    placeholder="Procurar"
+                  />
+                  <button type="button" id="search-btn" class="form-control search">
                     <i class="fa fa-search"></i>
                   </button>
                 </div>
@@ -113,13 +119,15 @@
     <br />
 
     <div class="container-fluid padding">
-      <div class="row" id="main-div">
-        <h2 style="color: var(--secondary-color)">Gráfico de desempenho</h2>
-        <div id="chart" style="margin: 0 auto">
-          <canvas id="canvas-radar"></canvas>
-        </div>
-        <div id="chart" style="margin: 0 auto">
-          <canvas id="canvas-bar"></canvas>
+      <div id="main-div">
+        <div class="row">
+          <h2 style="color: var(--secondary-color)">Gráfico de desempenho</h2>
+          <div class="col-6" id="chart" style="margin: 0 auto">
+            <canvas id="canvas-radar"></canvas>
+          </div>
+          <div class="col-6" id="chart" style="margin: 0 auto">
+            <canvas id="canvas-bar"></canvas>
+          </div>
         </div>
       </div>
 

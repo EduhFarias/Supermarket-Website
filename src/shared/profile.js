@@ -93,10 +93,100 @@ function paymentMethods() {
 
 function showHistoric() {
   getUserPurchases().then((purchases) => {
-    console.log(purchases);
+    let html = '<div class="row historic-block">';
+    purchases.forEach((purchase, index) => {
+      html +=
+        '<div class="col-12 card-historic" name="card-historic" id="' +
+        index +
+        '">' +
+        '<span class="card-historic-date" >' +
+        new Date(purchase.obj.created.seconds * 1000).toLocaleString() +
+        '</span><hr/>' +
+        '<span class="card-historic-value"> Valor total da compra: R$ ' +
+        (purchase.obj.payment === 'pix' ? purchase.obj.pixValue : purchase.obj.totalValue) +
+        '</span>' +
+        '</div><br />';
+    });
+    document.getElementById('main-div').innerHTML = html + '</div>';
+
+    document.getElementsByName('card-historic').forEach((card) => {
+      card.addEventListener('click', (event) => {
+        if (event.target.id) displayCard(purchases[event.target.id].obj);
+      });
+    });
   });
-  // LISTA DE OBJETOS E QUANDO CLICAR ABRIR UM MODAL COM INFORMAÇAO DETALHADA
-  document.getElementById('main-div').innerHTML = 'historic';
+}
+
+function displayCard(obj) {
+  let html =
+    '<div class="row"><div class="col-9" style="max-height: 600px;overflow-y: auto;"><h3 style="margin-left: 10px"><i class="fa-solid fa-basket-shopping"></i>PRODUTOS</h3>';
+  obj.products.forEach((product) => {
+    const auxObj = new Product('', product.price, '', '', '', '', product.discount, '');
+    html +=
+      '<div class="cart-product row">' +
+      '<div class="col-2"><img src="./fonts/products/' +
+      product.imgSrc +
+      '"></div>' +
+      '<div class="col-6"><span class="span-cart-provider">' +
+      product.provider +
+      '</span><br />' +
+      '<span>' +
+      product.name +
+      ', ' +
+      product.unit +
+      ', ' +
+      product.provider +
+      (product.isNatural ? ', Produto natural' : '') +
+      '</span></div>' +
+      '<div class="col-2">' +
+      '<span>Quantidade(' +
+      product.unit +
+      '):</span>' +
+      '<input type="text" name="amount" value="' +
+      product.amount +
+      '" style="width: 40px" disabled>' +
+      '<br />' +
+      '</div>' +
+      '<div class="col-2"><span>Preço:' +
+      (product.discount == '0.0'
+        ? '<p class="value" style="font-size: 20px">R$ ' + product.price + '</p>'
+        : '<p class="dashed-value" style="font-size: 16px; margin-bottom: -5px">R$ ' +
+          product.price +
+          '</p>' +
+          '<p class="value" style="font-size: 20px">R$ ' +
+          auxObj.getDiscountPrice() +
+          '</p>') +
+      '</span></div>' +
+      '</div>';
+  });
+
+  html +=
+    '</div>' +
+    '<div class="col-3">' +
+    '<h3>' +
+    '<i class="fa-solid fa-file-invoice-dollar"></i>' +
+    'RESUMO' +
+    '</h3>' +
+    '<p>Valor total dos produtos: <span style="font-weight: bolder" id="total">R$ ' +
+    obj.totalValue +
+    '</span></p><hr />' +
+    '<div class="col-12 pix"><h5>Valor no <b>PIX</b>: <span style="font-weight: bolder" id="pix">R$ ' +
+    obj.pixValue +
+    '</span></h5><p style="text-align:left; left:10%">(Economize: <b>R$ ' +
+    obj.discount +
+    '</b>)</p></div>' +
+    '<hr />' +
+    '<span>Frete: ' +
+    (obj.shipping === 'local' ? 'Buscado pessoalmente' : 'Entregue no endereço com taxa de R$: 5,00') +
+    '<span>' +
+    '<hr />' +
+    '<span>Forma de pagamento: ' +
+    (obj.payment === 'pix' ? 'Pago utilizando o PIX' : 'Pago no cartão e parcelando em ' + obj.stages + 'x') +
+    '<span>' +
+    '</div>';
+  document.getElementById('modal-body').innerHTML = html;
+  var myModal = new bootstrap.Modal(document.getElementById('historicCardModal'));
+  myModal.show();
 }
 
 function checkInitialCondition() {

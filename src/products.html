@@ -83,8 +83,14 @@
             <li class="nav-item">
               <form action="#" class="searchform order-sm-start order-lg-last">
                 <div class="form-group d-flex mx-2 custom-search">
-                  <input type="text" class="form-control" style="color: var(--main-color)" placeholder="Procurar" />
-                  <button type="submit" class="form-control search">
+                  <input
+                    type="text"
+                    class="form-control"
+                    style="color: var(--main-color)"
+                    id="search-input"
+                    placeholder="Procurar"
+                  />
+                  <button type="button" id="search-btn" class="form-control search">
                     <i class="fa fa-search"></i>
                   </button>
                 </div>
@@ -102,7 +108,7 @@
     <!-- altera esse filtro e pesquisa pelo filtro -->
     <div class="container-fluid padding">
       <div class="col-12">
-        <h3>FILTRO E PESQUISA</h3>
+        <h3>PRODUTOS</h3>
       </div>
       <hr />
       <div class="row" id="products-list"></div>

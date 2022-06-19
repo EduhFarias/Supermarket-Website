@@ -1,12 +1,13 @@
 function showCharts() {
   document.getElementById('main-div').innerHTML =
+    '<div class="row">' +
     '<h2 style="color: var(--secondary-color)">Gráfico de desempenho</h2>' +
-    '<div id="chart" style="margin: 0 auto">' +
+    '<div class="col-6" id="chart" style="margin: 0 auto">' +
     '<canvas id="canvas-radar"></canvas>' +
     '</div>' +
-    '<div id="chart" style="margin: 0 auto">' +
+    '<div class="col-6" id="chart" style="margin: 0 auto">' +
     '<canvas id="canvas-bar"></canvas>' +
-    '</div>';
+    '</div></div>';
   setupCharts();
 }
 
@@ -18,20 +19,25 @@ function manageProducts() {
   allProducts().then((products) => {
     savedProducts = products;
 
-    let addProduct = '<div class="col-12"><a onclick="showProductForm()">Adicionar novo produto</a></div>';
+    let addProduct =
+      '<div class="col-12"><a class="btn btn-primary btn-full" onclick="showProductForm()">Adicionar novo produto</a></div>';
     let productsList = products.map(
       (product, index) =>
-        '<div class="col-4 product"><a onclick="showProductForm(' + index + ')">' + product.name + '</a></div>'
+        '<div class="col-4 product"><a class="btn btn-primary btn-full" style="background-color: var(--alternative-color)" onclick="showProductForm(' +
+        index +
+        ')">' +
+        product.name +
+        '</a></div>'
     );
 
     document.getElementById('main-div').innerHTML =
       '<div class="row">' +
-      '<div class="col-md-4 list">' +
+      '<div class="col-md-6 list">' +
       '<div class="row">' +
       addProduct +
       productsList.join('') +
       '</div></div>' +
-      '<div id="product" class="col-md-8 product-form">' +
+      '<div id="product" class="col-md-6 product-form">' +
       '<div></div>';
     showProductForm();
   });
@@ -39,7 +45,7 @@ function manageProducts() {
 
 function showProductForm(ref = 'default') {
   let product;
-  if (ref == 'default') product = new Product('', '', '', false, '', '', '', savedProducts.length);
+  if (ref == 'default') product = new Product('', '', '', '', false, '', '', '', savedProducts.length);
   else product = savedProducts[ref];
 
   let html =
@@ -69,6 +75,12 @@ function showProductForm(ref = 'default') {
     product.unit +
     '">' +
     '</div>' +
+    '<div class="product-type">' +
+    '<label for="type">Tipo</label><br />' +
+    '<input id="type" type="text" placeholder="Arroz, carne, limpeza, fruta" value="' +
+    product.type +
+    '">' +
+    '</div>' +
     '<div class="product-provider">' +
     '<label for="provider">Fornecedor</label><br />' +
     '<input id="provider" type="text" placeholder="Fornecedor" value="' +
@@ -90,7 +102,7 @@ function showProductForm(ref = 'default') {
     '<label for="is-natural"></label>' +
     '</div>' +
     '</div>' +
-    '<button type="button" class="btn btn-primary" id="submitProduct">' +
+    '<button type="button" class="btn btn-primary btn-full" style="width:150px; margin-top: 5px" id="submitProduct">' +
     (product.name == '' ? 'Cadastrar' : 'Editar') +
     '</button>' +
     '<fieldset></form>';
@@ -106,18 +118,24 @@ function manageUsers() {
   getAllUsers().then((users) => {
     savedUsers = users;
 
-    let addUser = '<div class="col-12"><a onclick="showUser()">Adicionar novo usuário</a></div>';
+    let addUser =
+      '<div class="col-12"><a class="btn btn-primary btn-full" onclick="showUser()">Adicionar novo usuário</a></div>';
     let usersList = users.map(
-      (user, index) => '<div class="col-md-4 "><a onclick="showUser(' + index + ')">' + user.name + '</a></div>'
+      (user, index) =>
+        '<div class="col-md-4 "><a class="btn btn-primary btn-full" style="background-color: var(--alternative-color)" onclick="showUser(' +
+        index +
+        ')">' +
+        user.name +
+        '</a></div>'
     );
     document.getElementById('main-div').innerHTML =
       '<div class="row">' +
-      '<div class="col-md-4 list">' +
+      '<div class="col-md-6 list">' +
       '<div class="row">' +
       addUser +
       usersList.join(' ') +
       '</div></div>' +
-      '<div id="user" class="col-md-8">' +
+      '<div id="user" class="col-md-6 product-form">' +
       '<div></div>';
     showUser();
   });
@@ -167,7 +185,7 @@ function showUser(index = 0) {
     '<label for="is-admin"></label>' +
     '</div>' +
     '</div>' +
-    '<button type="button" class="btn btn-primary" id="submitUser">Editar</button>' +
+    '<button type="button" class="btn btn-primary btn-full" style="width:150px; margin-top: 10px" id="submitUser">Editar</button>' +
     '<fieldset></form>';
 
   document.getElementById('user').innerHTML = html;
@@ -180,19 +198,24 @@ function showUser(index = 0) {
 function manageProviders() {
   getAllProviders().then((providers) => {
     savedProdivers = providers;
-    let addProvider = '<div class="col-12"><a onclick="showProvider()">Adicionar novo fornecedor</a></div>';
+    let addProvider =
+      '<div class="col-12"><a class="btn btn-primary btn-full" onclick="showProvider()">Adicionar novo fornecedor</a></div>';
     let providersList = providers.map(
       (provider, index) =>
-        '<div class="col-md-4"><a onclick="showProvider(' + index + ')">' + provider.name + '</a></div>'
+        '<div class="col-md-4"><a class="btn btn-primary btn-full" style="background-color: var(--alternative-color)" onclick="showProvider(' +
+        index +
+        ')">' +
+        provider.name +
+        '</a></div>'
     );
     document.getElementById('main-div').innerHTML =
       '<div class="row">' +
-      '<div class="col-md-4 list">' +
+      '<div class="col-md-6 list">' +
       '<div class="row">' +
       addProvider +
       providersList.join(' ') +
       '</div></div>' +
-      '<div id="provider" class="col-md-8">' +
+      '<div id="provider" class="col-md-6 product-form">' +
       '<div></div>';
     showProvider();
   });
@@ -242,7 +265,7 @@ function showProvider(ref = 'default') {
     provider.type +
     '">' +
     '</div>' +
-    '<button type="button" class="btn btn-primary" id="submitProvider">' +
+    '<button type="button" class="btn btn-primary btn-full" style="width:150px; margin-top: 10px" id="submitProvider">' +
     (provider.name == '' ? 'Cadastrar' : 'Editar') +
     '</button>' +
     '<fieldset></form>';
@@ -253,10 +276,3 @@ function showProvider(ref = 'default') {
     setProvider();
   };
 }
-
-///////////////////////////////
-///////////////////////////////
-// ONDE TEM <UL><LI> TALVEZ TROCAR POR UMA DIV COM BOTÃO CADA UMA COM COL-MD-2 PARA ELE MOSTRAR ORGANIZADO
-// E LIMITAR A ALTURA PARA ADICIONAR O OVERFLOW-Y E X
-///////////////////////////////
-///////////////////////////////

@@ -58,3 +58,33 @@ function addToCart(idx) {
 function added(id) {
   document.getElementById(id).classList.toggle('product-added');
 }
+
+let allProductsToDisplay = [];
+
+document.getElementById('search-btn').addEventListener('click', () => {
+  let searchInput = document
+    .getElementById('search-input')
+    .value.toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .split(' ');
+
+  let products = allProductsToDisplay.map((product) =>
+    (product.name + ',' + product.provider + (product.isNatural ? ',natural' : '') + product.type)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+  );
+
+  let idxs = [];
+
+  products.forEach((product, index) => {
+    searchInput.forEach((word) => {
+      if (product.includes(word)) idxs.push(index);
+    });
+  });
+
+  const finalProducts = idxs.map((idx) => allProductsToDisplay[idx]);
+  console.log(finalProducts);
+  displayAllProducts(finalProducts);
+});

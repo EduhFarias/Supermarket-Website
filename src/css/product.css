@@ -46,32 +46,6 @@ body {
 .product-added {
   border: solid 1px var(--secondary-color);
 }
-/*
-.product-added::before,
-.product-added::after {
-  content: '';
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border-color: transparent;
-  border-style: solid;
-  z-index: 1;
-}
-
-.product-added::after {
-  content: '\2713';
-  font-size: 13px;
-  line-height: 13px;
-  font-weight: bold;
-  color: white;
-}
-
-.product-added::before {
-  border-radius: 0;
-  border-width: 12px;
-  border-left-color: var(--secondary-color);
-  border-top-color: var(--secondary-color);
-} */
 
 .cart-description {
   max-height: 1000px;

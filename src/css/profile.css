@@ -142,3 +142,69 @@
   left: 13.5px;
   top: 2px;
 }
+
+.historic-block {
+  text-align: center;
+  width: 600px;
+  border: dashed 2px var(--main-color);
+  background-color: rgba(78, 228, 188, 0.2);
+  margin: 0 auto;
+  padding: 2%;
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+.card-historic {
+  background-color: #fff;
+  margin: 0 auto;
+  border: solid 2px var(--main-color);
+  width: 600px;
+  padding: 1%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.card-historic:hover {
+  background-color: rgba(78, 228, 188, 0.1);
+}
+
+.card-historic-date {
+  font-size: x-large;
+  color: var(--main-color);
+}
+
+.card-historic-value {
+  font-size: 24px;
+  color: var(--secondary-color);
+}
+
+.cart-product {
+  border: solid 1px var(--main-color);
+  border-radius: 5px;
+  margin: 1%;
+  padding: 1%;
+}
+
+.cart-product img {
+  height: 70px;
+}
+
+.span-cart-provider {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.value {
+  font-size: 30px;
+  color: var(--alternative-color);
+}
+
+.dashed-value {
+  text-decoration: line-through;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+#products-list {
+  padding: 2%;
+}

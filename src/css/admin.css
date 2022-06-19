@@ -36,18 +36,30 @@
 /* PRODUCT */
 .list {
   text-align: center;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
-.product {
-  border: solid 1px var(--main-color);
-  border-radius: 5px;
-  background-color: var(--secondary-color);
-  color: #ffffff;
+.btn-full {
+  font-size: large;
+  font-weight: bolder;
+  background-color: var(--main-color);
+  opacity: 0.9;
+  border-color: var(--main-color);
+  margin-bottom: 5px;
+  width: 100%;
 }
 
-.product-form {
-  border: solid 2px var(--main-color);
-  padding: 1%;
+.btn-full:hover {
+  opacity: 1;
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+
+.product-form input,
+textarea {
+  width: 500px;
+  color: var(--main-color);
 }
 
 .product-form label {
