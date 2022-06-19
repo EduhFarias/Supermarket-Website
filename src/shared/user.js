@@ -78,22 +78,6 @@ async function getUserCard() {
   return await userCard;
 }
 
-async function getUserHistoric() {
-  let userUID = window.sessionStorage.getItem('user');
-  let userHistoric = db
-    .collection('cards')
-    .doc(userUID)
-    .get()
-    .then((docRef) => {
-      if (docRef.data()) return docRef.data();
-      return {};
-    })
-    .catch((error) => {
-      console.log('User not found: ', error.error);
-    });
-  return await userHistoric;
-}
-
 function editUser() {
   const docRef = document.getElementsByClassName('profile')[0];
   db.collection('users')
@@ -144,6 +128,21 @@ async function getAllProviders() {
         docs.push(doc.data());
       });
       savedProdivers = docs;
+      return docs;
+    });
+}
+
+async function getUserPurchases() {
+  return await db
+    .collection('purchases')
+    .doc(window.sessionStorage.getItem('user'))
+    .collection('purchase')
+    .get()
+    .then((querySnapshot) => {
+      let docs = [];
+      querySnapshot.forEach((doc) => {
+        docs.push(doc.data());
+      });
       return docs;
     });
 }

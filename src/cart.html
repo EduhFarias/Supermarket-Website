@@ -104,12 +104,19 @@
       <div class="row" style="padding: 0 5%; align-content: center">
         <div class="col-md-8">
           <div class="cart-description">
-            <h3>
-              <i class="fa-solid fa-basket-shopping"></i>
-              PRODUTOS
-            </h3>
+            <div class="row">
+              <div class="col-8">
+                <h3>
+                  <i class="fa-solid fa-basket-shopping"></i>
+                  PRODUTOS
+                </h3>
+              </div>
+              <div class="col-4" style="text-align: right">
+                <button class="btn btn-outline-danger" onclick="removeAllProducts()">REMOVER TUDO</button>
+              </div>
+            </div>
             <hr />
-            <div id="description"></div>
+            <div id="description" class="row"></div>
           </div>
         </div>
         <div class="col-md-3">

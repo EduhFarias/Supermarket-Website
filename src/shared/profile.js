@@ -46,6 +46,8 @@ function editProfile() {
 function paymentMethods() {
   getUserCard().then((card) => {
     if (Object.keys(card).length === 0) card = { cvc: '', name: '', number: '', validity: '' };
+    else window.sessionStorage.setItem('registerCard', 'false');
+
     let cardF =
       '<div class="col-md-5 credit-card">' +
       '<span class="bank-name">BANK</span>' +
@@ -90,5 +92,14 @@ function paymentMethods() {
 }
 
 function showHistoric() {
+  getUserPurchases().then((purchases) => {
+    console.log(purchases);
+  });
+  // LISTA DE OBJETOS E QUANDO CLICAR ABRIR UM MODAL COM INFORMAÇAO DETALHADA
   document.getElementById('main-div').innerHTML = 'historic';
+}
+
+function checkInitialCondition() {
+  if (window.sessionStorage.getItem('registerCard') === 'true') paymentMethods();
+  else editProfile();
 }

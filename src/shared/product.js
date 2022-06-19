@@ -54,8 +54,49 @@ function setProduct(defaultImg = '', id) {
     .catch((error) => alert('Erro ao cadastrar produto'));
 }
 
+function savePurchase(obj) {
+  date = new Date();
+  obj.created = date.getTime();
+  db.collection('purchases')
+    .doc(window.localStorage.getItem('user'))
+    .collection('purchase')
+    .doc(date.toString().replace(' GMT-0300 (Brasilia Standard Time)', ''))
+    .set({
+      obj: obj,
+    })
+    .then(() => {
+      window.sessionStorage.removeItem('productsInCart');
+      window.sessionStorage.removeItem('count');
+      document.getElementById('modal-body').innerHTML = '<h3>COMPRA CONFIRMADA!</h3>';
+      setTimeout(() => window.location.replace('index.html'), 2000);
+    })
+    .catch((error) => console.log(error));
+}
+
+let hasCC = false;
+db.collection('cards')
+  .doc(window.sessionStorage.getItem('user'))
+  .get()
+  .then((doc) => {
+    if (doc.exists) hasCC = true;
+  });
+
+function removeAllProducts() {
+  window.sessionStorage.removeItem('productsInCart');
+  window.sessionStorage.removeItem('count');
+  window.location.replace('index.html');
+}
+
 function removeProduct(index) {
-  console.log(index);
+  const productsInCart = JSON.parse(window.sessionStorage.getItem('productsInCart'));
+  let count = window.sessionStorage.getItem('count');
+  productsInCart.splice(productsInCart.indexOf(productsInCart[index]), 1);
+
+  count--;
+  window.sessionStorage.setItem('productsInCart', JSON.stringify(productsInCart));
+  window.sessionStorage.setItem('count', count);
+  document.getElementsByClassName('badge')[0].setAttribute('value', count);
+  loadCartInfo();
 }
 
 function displayAllProducts() {
@@ -165,14 +206,12 @@ function loadCartInfo() {
     '<div class="col-12">' +
     '<p>Valor total dos produtos: <span style="font-weight: bolder" id="total">R$ ' +
     totalValue.toFixed(2) +
-    '</span></p><hr />';
-  summary +=
+    '</span></p><hr />' +
     '<div class="col-12 pix"><h5>Valor no <b>PIX</b>: <span style="font-weight: bolder" id="pix">R$ ' +
     pixValue.toFixed(2) +
     '</span></h5><p style="text-align:left; left:10%">(Economize: <b>R$ ' +
     (totalValue - pixValue).toFixed(2) +
-    '</b>)</p></div>';
-  summary +=
+    '</b>)</p></div>' +
     '<button class="btn btn-primary btn-full" id="load-payment">IR PARA O PAGAMENTO</button>' +
     '<button class="btn btn-outline-primary btn-outline" id="redirect">CONTINUAR COMPRANDO</button>';
 
@@ -184,7 +223,6 @@ function loadCartInfo() {
       productsInCart.forEach((product, index) => {
         product.amount = parseFloat(document.getElementById('amount-' + index).value);
       });
-      console.log(productsInCart);
       window.sessionStorage.setItem('productsInCart', JSON.stringify(productsInCart));
       loadCartInfo();
     });
@@ -199,7 +237,7 @@ function loadCartInfo() {
       totalValue.toFixed(2) +
       '</span></p><hr />' +
       '<span>Frete:</span>' +
-      '<form>' +
+      '<form class="form-shipping">' +
       '<input type="radio" id="radio-local" name="shipping" value="local">' +
       '<label for="radio-local"> Buscar no local</label><br>' +
       '<input type="radio" id="radio-shipping" name="shipping" value="shipping">' +
@@ -212,7 +250,7 @@ function loadCartInfo() {
       (totalValue - pixValue).toFixed(2) +
       '</b>)</p></div>' +
       '<div class="row"><h5 style="color: var(--main-color)">MÉTODO</h5><hr>' +
-      '<div class="col-12"><form>' +
+      '<div class="col-12"><form class="form-payment">' +
       '<input type="radio" id="radio-pix" name="payment" value="pix">' +
       '<label for="radio-pix"> PIX</label><br>' +
       '<input type="radio" id="radio-cc" name="payment" value="cc">' +
@@ -222,33 +260,71 @@ function loadCartInfo() {
       '</div>';
     document.getElementById('s-p').innerHTML = html;
 
+    const purchaseObj = {
+      discount: (totalValue - pixValue).toFixed(2),
+      totalValue: totalValue,
+      pixValue: pixValue,
+      products: productsInCart,
+      shipping: 'local',
+      payment: 'pix',
+      stages: 1,
+    };
+
     document.getElementsByName('shipping').forEach((input) => {
       input.addEventListener('click', () => {
-        if (document.querySelector('input[name="shipping"]').checked) {
+        if (document.querySelector('input[name="shipping"]:checked').value == 'local') {
           document.getElementById('total').innerHTML = 'R$ ' + totalValue.toFixed(2);
           document.getElementById('pix').innerHTML = 'R$ ' + pixValue.toFixed(2);
+          purchaseObj.pixValue = pixValue.toFixed(2);
+          purchaseObj.totalValue = totalValue.toFixed(2);
+          purchaseObj.shipping = 'local';
         } else {
           document.getElementById('total').innerHTML = 'R$ ' + (totalValue + 5.0).toFixed(2);
           document.getElementById('pix').innerHTML = 'R$ ' + (pixValue + 5.0).toFixed(2);
+          purchaseObj.pixValue = (pixValue + 5.0).toFixed(2);
+          purchaseObj.totalValue = (totalValue + 5.0).toFixed(2);
+          purchaseObj.shipping = 'shipping';
         }
       });
     });
 
     document.getElementById('confirm-payment').addEventListener('click', () => {
       const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-      let modalContent = '<h3>COMPRA CONFIRMADA!</h3>';
-      if (paymentMethod === 'pix')
-        modalContent =
+      purchaseObj.payment = paymentMethod;
+      if (paymentMethod === 'pix') {
+        document.getElementById('modal-body').innerHTML =
           '<h4>ESCANEEI O QR-CODE PARA CONFIRMAR O PAGAMENTO PELO PIX!</h4>' +
           '<img style="height:100%" src="./fonts/qrcode.png" alt="" />';
-      document.getElementById('modal-body').innerHTML = modalContent;
-      document.getElementById('modal-body');
-      // window.location.replace('products.html');
+        savePurchase(purchaseObj);
+      } else {
+        if (!hasCC) {
+          window.sessionStorage.setItem('registerCard', 'true');
+          window.location.replace('profile.html');
+        } else {
+          document.getElementById('modal-body').innerHTML =
+            '<label for="stages" style="font-size: 30px; color: var(--main-color)">Quantas vezes deseja parcelar a compra? </label>' +
+            '<select id="stages" name="stages" >' +
+            '<option value="1">1x</option>' +
+            '<option value="2">2x</option>' +
+            '<option value="3">3x</option>' +
+            '<option value="4">4x</option>' +
+            '<option value="5">5x</option>' +
+            '</select><br />' +
+            '<span class="stages">Valor de cada parcela: <span id="cc-value">R$ ' +
+            totalValue +
+            '</span></span><br />' +
+            '<button class="btn btn-primary btn-full" id="confirm">CONFIRMAR PARCELAMENTO</button>';
+
+          document.getElementById('stages').addEventListener('change', () => {
+            purchaseObj.stages = parseInt(document.getElementById('stages').value);
+            document.getElementById('cc-value').innerHTML = 'R$ ' + (totalValue / purchaseObj.stages).toFixed(2);
+          });
+
+          document.getElementById('confirm').addEventListener('click', () => savePurchase(purchaseObj));
+        }
+      }
     });
   });
 
   document.getElementById('redirect').addEventListener('click', () => window.location.replace('products.html'));
 }
-
-// NO BOTÃO DE CONFIRMAR, AGORA SALVAR TODOS OS VALORES E METODOS USADOS PARA ENVIAR PARA O HISTORICO DE COMPRAS
-// ADD FUNÇAO PRA REMOVER SE N JA TIVER

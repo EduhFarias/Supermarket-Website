@@ -155,3 +155,33 @@ body {
 #paymentModal {
   text-align: center;
 }
+
+.form-shipping {
+  position: relative;
+  top: -24px;
+  left: 125px;
+  width: 150px;
+}
+
+.form-payment {
+  position: relative;
+  top: -10px;
+}
+
+#stages {
+  font-size: x-large;
+  color: var(--main-color);
+  margin-left: 10px;
+  border-color: var(--main-color);
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.stages {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: x-large;
+}
+
+#cc-value {
+  color: var(--secondary-color);
+}
