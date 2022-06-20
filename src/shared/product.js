@@ -71,7 +71,7 @@ function savePurchase(obj) {
     .then(() => {
       window.sessionStorage.removeItem('productsInCart');
       window.sessionStorage.removeItem('count');
-      document.getElementById('modal-body').innerHTML = '<h3>COMPRA CONFIRMADA!</h3>';
+      setTimeout(() => (document.getElementById('modal-body').innerHTML = '<h3>COMPRA CONFIRMADA!</h3>'), 1000);
       setTimeout(() => window.location.replace('index.html'), 5000);
     })
     .catch((error) => console.log(error));
