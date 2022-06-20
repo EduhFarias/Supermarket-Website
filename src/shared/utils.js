@@ -68,9 +68,19 @@ document.getElementById('search-btn').addEventListener('click', () => {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .split(' ');
+  search(searchInput);
+});
 
+function search(searchInput) {
   let products = allProductsToDisplay.map((product) =>
-    (product.name + ',' + product.provider + (product.isNatural ? ',natural' : '') + product.type)
+    (
+      product.name +
+      ',' +
+      product.provider +
+      (product.isNatural ? ',natural' : '') +
+      product.type +
+      (product.discount !== '0.0' ? ', Desconto, oferta, ofertas' : '')
+    )
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
@@ -85,6 +95,9 @@ document.getElementById('search-btn').addEventListener('click', () => {
   });
 
   const finalProducts = idxs.map((idx) => allProductsToDisplay[idx]);
-  console.log(finalProducts);
-  displayAllProducts(finalProducts);
-});
+
+  window.sessionStorage.setItem('productsToFilter', JSON.stringify(finalProducts));
+  if (!window.location.pathname.includes('products.html'))
+    setTimeout(() => window.location.replace('products.html'), 500);
+  else displayAllProducts();
+}

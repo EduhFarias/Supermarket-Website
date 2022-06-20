@@ -28,27 +28,27 @@ const configRadar = {
     ],
     datasets: [
       {
-        label: 'My First dataset',
+        label: 'Novos clientes',
         backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
         borderColor: window.chartColors.red,
         pointBackgroundColor: window.chartColors.red,
-        data: [8, 1, 5, 2, 4, 10, 0, 0, 3, 9, 2, 5],
+        data: [8, 10, 15, 5, 22, 10, 7, 13, 3, 9, 16, 5],
         notes: [],
       },
       {
-        label: 'My Second dataset',
+        label: 'Vendas pelo site',
         backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
         borderColor: window.chartColors.blue,
         pointBackgroundColor: window.chartColors.blue,
-        data: [10, 3, 4, 3, 5, 8, 7, 8, 9, 3, 1, 2],
+        data: [35, 31, 42, 23, 15, 38, 24, 22, 19, 33, 12, 27],
         notes: [],
       },
       {
-        label: 'My Third dataset',
+        label: 'Novos fornecedores',
         backgroundColor: color(window.chartColors.purple).alpha(0.2).rgbString(),
         borderColor: window.chartColors.purple,
         pointBackgroundColor: window.chartColors.purple,
-        data: [0, 0, 1, 0, 0, 1, 0, 1, 2, 6, 1, 2],
+        data: [3, 5, 8, 0, 2, 1, 0, 1, 2, 3, 1, 1],
         notes: [],
       },
     ],
@@ -159,7 +159,7 @@ const configBar = {
     ],
     datasets: [
       {
-        label: 'My First dataset',
+        label: 'Compras buscando no estabelecimento',
         backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
         borderColor: window.chartColors.red,
         pointBackgroundColor: window.chartColors.red,
@@ -167,7 +167,7 @@ const configBar = {
         notes: [],
       },
       {
-        label: 'My Second dataset',
+        label: 'Compras pagando frete',
         backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
         borderColor: window.chartColors.blue,
         pointBackgroundColor: window.chartColors.blue,

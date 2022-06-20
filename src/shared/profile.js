@@ -139,9 +139,7 @@ function displayCard(obj) {
       (product.isNatural ? ', Produto natural' : '') +
       '</span></div>' +
       '<div class="col-2">' +
-      '<span>Quantidade(' +
-      product.unit +
-      '):</span>' +
+      '<span>Quantidade:</span>' +
       '<input type="text" name="amount" value="' +
       product.amount +
       '" style="width: 40px" disabled>' +

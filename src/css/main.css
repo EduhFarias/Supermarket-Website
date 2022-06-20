@@ -236,3 +236,18 @@ h5 {
   bottom: 0;
   line-height: 40px;
 }
+
+.main-index {
+  text-align: center;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 1%;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+.offers {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 70px;
+  color: var(--secondary-color);
+  margin-bottom: -35px;
+}

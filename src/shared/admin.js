@@ -1,7 +1,7 @@
 function showCharts() {
   document.getElementById('main-div').innerHTML =
     '<div class="row">' +
-    '<h2 style="color: var(--secondary-color)">Gráfico de desempenho</h2>' +
+    '<h2 style="color: var(--secondary-color)">Gráficos</h2>' +
     '<div class="col-6" id="chart" style="margin: 0 auto">' +
     '<canvas id="canvas-radar"></canvas>' +
     '</div>' +
@@ -141,8 +141,10 @@ function manageUsers() {
   });
 }
 
-function showUser(index = 0) {
-  let user = savedUsers[index];
+function showUser(ref = 'default') {
+  let user = '';
+  if (ref == 'default') user = { name: '', cpf: '', address: '', phone: '', email: '', admin: false };
+  else user = savedUsers[ref];
   let html =
     '<h3>Editar usuário' +
     '</h3><form id="user-form" runat="server"><fieldset>' +
@@ -156,13 +158,17 @@ function showUser(index = 0) {
     '<label for="email">Email</label><br />' +
     '<input id="email" type="text" placeholder="example@mail.com" value="' +
     user.email +
-    '" disabled>' +
+    '" ' +
+    (user.email === '' ? '' : 'disabled') +
+    '>' +
     '</div>' +
     '<div class="user-cpf">' +
-    '<label for="cpf">CPF</label><br />' +
-    '<input id="cpf" type="text" value="' +
+    '<label for="cpf">CPF(Somente números)</label><br />' +
+    '<input id="cpf" type="text" placeholder="123.456.789-01" value="' +
     user.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4') +
-    '" disabled>' +
+    '" ' +
+    (user.cpf === '' ? '' : 'disabled') +
+    '>' +
     '</div>' +
     '<div class="user-phone">' +
     '<label for="phone">Telefone</label><br />' +

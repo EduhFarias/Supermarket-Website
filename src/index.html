@@ -22,6 +22,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <!-- Google Fonts - Luckiest Guy -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
     <link href="./css/main.css" rel="stylesheet" />
     <link href="./css/navbar.css" rel="stylesheet" />
   </head>
@@ -47,7 +51,6 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <!-- TIRAR ESSE ACTIVE E ADICIONAR NO JS COM BASE NA PAG SELECIONADA -->
               <a class="nav-link mx-2 active" aria-current="page" href="index.html">Home</a>
             </li>
             <li class="nav-item">
@@ -106,10 +109,66 @@
     <br />
 
     <div class="container-fluid padding">
-      <div class="row">
-        <div class="col-12" style="height: 1500px; border: solid 1px black">
-          <button class="btn btn-primary" onclick="clickP()">add</button>
-          <button class="btn btn-danger" onclick="clickM()">remove</button>
+      <div class="main-index">
+        <div class="col-12">
+          <img src="./fonts/banner.png" style="cursor: pointer" alt="banner-fruits" onclick="search(['fruta'])" />
+        </div>
+
+        <br />
+
+        <div class="col-12" style="padding: 1.5%">
+          <h1 class="offers">OFERTAS</h1>
+          <hr />
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="./fonts/img1.png" class="d-block w-100" alt="..." />
+              </div>
+              <div class="carousel-item">
+                <img src="./fonts/img2.png" class="d-block w-100" alt="..." />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+        <br />
+
+        <div class="col-12">
+          <img src="./fonts/banner2.jpg" style="cursor: pointer" onclick="search(['limpeza'])" alt="banner-cleanner" />
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@
     <link href="./css/navbar.css" rel="stylesheet" />
   </head>
 
-  <body onload="handleNavbar()">
+  <body onload="handleNavbar(); allProducts()">
     <nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: #126b69">
       <div class="container-fluid">
         <a class="navbar-brand d-block d-lg-none" href="index.html">
@@ -54,7 +54,6 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <!-- TIRAR ESSE ACTIVE E ADICIONAR NO JS COM BASE NA PAG SELECIONADA -->
               <a class="nav-link mx-2 active" aria-current="page" href="index.html">Home</a>
             </li>
             <li class="nav-item">
@@ -152,5 +151,6 @@
     <script src="./backend/firebase.js"></script>
     <script src="./backend/auth.js"></script>
     <script src="./shared/utils.js"></script>
+    <script src="./shared/product.js"></script>
   </body>
 </html>

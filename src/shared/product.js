@@ -15,7 +15,9 @@ class Product {
   }
   getDiscountPrice() {
     const BRLocale = Intl.NumberFormat('en-BR');
-    return BRLocale.format(parseFloat(this.price) - parseFloat(this.price) * (parseFloat(this.discount) / 100));
+    return BRLocale.format(
+      (parseFloat(this.price) - parseFloat(this.price) * (parseFloat(this.discount) / 100)).toFixed(2)
+    );
   }
 }
 
@@ -101,7 +103,10 @@ function removeProduct(index) {
   loadCartInfo();
 }
 
-function displayAllProducts(filteredProducts = []) {
+function displayAllProducts() {
+  let filteredProducts = JSON.parse(window.sessionStorage.getItem('productsToFilter'));
+  filteredProducts = filteredProducts === null ? [] : filteredProducts;
+
   allProducts().then((products) => {
     listedProducts = products;
     let html = '';
@@ -119,7 +124,7 @@ function displayAllProducts(filteredProducts = []) {
         ')">' +
         '<img src="./fonts/products/' +
         product.imgSrc +
-        '">' +
+        '"><hr />' +
         '<p class="description">' +
         product.name +
         ', ' +
@@ -140,6 +145,7 @@ function displayAllProducts(filteredProducts = []) {
     });
     document.getElementById('products-list').innerHTML = html;
     preLoadCart();
+    window.sessionStorage.removeItem('productsToFilter');
   });
 }
 
@@ -182,9 +188,7 @@ function loadCartInfo() {
       (product.isNatural ? ', Produto natural' : '') +
       '</span></div>' +
       '<div class="col-2">' +
-      '<span>Quantidade(' +
-      product.unit +
-      '):</span>' +
+      '<span>Quantidade:</span>' +
       '<input type="text" name="amount" id="amount-' +
       index +
       '" value="' +
@@ -235,6 +239,8 @@ function loadCartInfo() {
   });
 
   document.getElementById('load-payment').addEventListener('click', () => {
+    if (window.sessionStorage.getItem('user') === 'undefined' || window.sessionStorage.getItem('user') === null)
+      window.location.replace('signin.html');
     let html = '<h3><i class="fa-solid fa-money-check-dollar"></i> PAGAMENTO</h3>';
 
     html +=
